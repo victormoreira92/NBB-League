@@ -1,6 +1,5 @@
 package org.model;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -31,7 +30,7 @@ public class Game {
         Integer valueMax = Collections.max(teamScore.values());
         Team teamWinner = null;
         for(Team t : teamScore.keySet()){
-            if(teamScore.get(t) == valueMax){
+            if(teamScore.get(t).equals(valueMax)){
                 teamWinner = t;
             }
         }

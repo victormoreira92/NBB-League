@@ -5,13 +5,13 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class NBB {
-   private DataNbb dataChampionship;
+   private final DataNbb dataChampionship;
 
    public NBB(){
        dataChampionship = new DataNbb();
    }
     public void createChampionship(String[] lineEdit) {
-       Map<Team, Integer> teamsScore = new HashMap<Team, Integer>();
+       Map<Team, Integer> teamsScore = new HashMap<>();
 
         Team team1 = new Team(lineEdit[1]);
         Team team2 = new Team(lineEdit[2]);
@@ -34,15 +34,12 @@ public class NBB {
 
 
     public void playGames(){
-        List<Team> teamsTemp = new ArrayList<>();
 
         for(Game game : dataChampionship.getGames()){
             Team teamWinner = game.winnerTeam();
-            Iterator<Team> it = dataChampionship.getTeams().iterator();
 
-            while (it.hasNext()){
-                Team teamCurrent = it.next();
-                if(teamCurrent.getName().equals(teamWinner.getName())){
+            for (Team teamCurrent : dataChampionship.getTeams()) {
+                if (teamCurrent.getName().equals(teamWinner.getName())) {
                     teamCurrent.addPoints();
                 }
             }

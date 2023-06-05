@@ -3,12 +3,12 @@ package org.model;
 import java.util.*;
 
 public class DataNbb {
-    private Set<Team> teams;
-    private List<Game> games;
+    private final Set<Team> teams;
+    private final List<Game> games;
 
     public DataNbb() {
-        this.teams = new LinkedHashSet<Team>();
-        this.games = new ArrayList<Game>();
+        this.teams = new LinkedHashSet<>();
+        this.games = new ArrayList<>();
     }
 
     public void addTeam(Team team) {
