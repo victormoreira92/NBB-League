@@ -1,39 +1,44 @@
 package org.model;
 
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
 public class NBB {
-   private Set<Team> teams;
-   private List<Game> games;
+   private DataNbb dataChampionship;
 
    public NBB(){
-       teams =  new HashSet<>();
-       games = new ArrayList<>();
+       dataChampionship = new DataNbb();
    }
+    public void createChampionship(String[] lineEdit) {
+       Map<Team, Integer> teamsScore = new HashMap<Team, Integer>();
 
-   public void addGames(Game game){
-       games.add(game);
-   }
+        Team team1 = new Team(lineEdit[1]);
+        Team team2 = new Team(lineEdit[2]);
 
-   public void addTeams(Team team){
-       teams.add(team);
-   }
+        teamsScore.put(team1, Integer.valueOf(lineEdit[3]));
+        teamsScore.put(team2, Integer.valueOf(lineEdit[4]));
 
-    public Set<Team> getTeams() {
-        return teams;
+
+        createGame(new Game(LocalDateTime.now(), teamsScore));
+        registerTeam(team1);
+        registerTeam(team2);
     }
+   public void createGame(Game game){
+       dataChampionship.addGame(game);
+   }
 
-    public List<Game> getGames() {
-        return games;
-    }
+   public void registerTeam(Team team){
+       dataChampionship.addTeam(team);
+   }
+
 
     public void playGames(){
         List<Team> teamsTemp = new ArrayList<>();
 
-        for(Game game : games){
+        for(Game game : dataChampionship.getGames()){
             Team teamWinner = game.winnerTeam();
-            Iterator<Team> it = teams.iterator();
+            Iterator<Team> it = dataChampionship.getTeams().iterator();
 
             while (it.hasNext()){
                 Team teamCurrent = it.next();
@@ -47,8 +52,17 @@ public class NBB {
 
     }
     public void leagueTable(){
-       teams.stream()
+       dataChampionship.getTeams().stream()
                .sorted(Comparator.comparing(Team::getPoints).reversed())
                .forEach(System.out::println);
    }
+
+   public Set<Team> teamsInNBB(){
+       return dataChampionship.getTeams();
+   }
+
+    public List<Game> gamesInNBB(){
+        return dataChampionship.getGames();
+    }
+
 }
