@@ -10,7 +10,7 @@ public class Game {
 
 
 
-    public Game(LocalDateTime dateGame, HashMap<Team, Integer> teamScore) {
+    public Game(LocalDateTime dateGame, Map<Team, Integer> teamScore) {
         this.dateGame = dateGame;
         this.teamScore = teamScore;
 
