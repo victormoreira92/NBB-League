@@ -18,29 +18,15 @@ public class App {
         try(BufferedReader br = new BufferedReader(new FileReader(file))){
             String line;
             NBB nbb = new NBB();
-            HashMap<Team,Integer> teamScore = new HashMap<Team, Integer>();
 
 
             while((line = br.readLine()) != null){
                 String[] lineEdit = line.split("/");
-                
-
-                Team team1 = new Team(lineEdit[1]);
-                Team team2 = new Team(lineEdit[2]);
-
-
-                teamScore.put(team1, Integer.valueOf(lineEdit[3]));
-                teamScore.put(team2, Integer.valueOf(lineEdit[4]));
-
-
-                nbb.addGames(new Game(LocalDateTime.now(),teamScore));
-                nbb.addTeams(team1);
-                nbb.addTeams(team2);
-
-
+                nbb.createChampionship(lineEdit);
             }
 
-            System.out.println(nbb.getGames().get(0).toString());
+            nbb.playGames();
+            nbb.leagueTable();
 
         } catch (IOException e) {
             e.printStackTrace();
