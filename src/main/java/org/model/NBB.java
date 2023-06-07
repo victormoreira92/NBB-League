@@ -1,6 +1,8 @@
 package org.model;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -20,9 +22,18 @@ public class NBB {
         teamsScore.put(team2, Integer.valueOf(lineEdit[4]));
 
 
-        createGame(new Game(LocalDateTime.now(), teamsScore));
+
+        createGame(new Game(editDate(lineEdit), teamsScore));
         registerTeam(team1);
         registerTeam(team2);
+    }
+
+    private LocalDateTime editDate(String[] lineEdit){
+        String[] month_day = lineEdit[0].split("\\.");
+        String [] hour_minute = month_day[2].strip().split(":");
+
+        return LocalDateTime.of(LocalDate.now().getYear(),Integer.valueOf(month_day[1]),
+                Integer.valueOf(month_day[0]),Integer.valueOf(hour_minute[0]),Integer.valueOf(hour_minute[1]));
     }
    public void createGame(Game game){
        dataChampionship.addGame(game);
