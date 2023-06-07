@@ -1,6 +1,7 @@
 package org.model;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class Game {
@@ -21,8 +22,8 @@ public class Game {
     @Override
     public String toString() {
         return "Game{" +
-                "dateGame=" + dateGame +
-                ", teams=" + teamScore.keySet().toString()+" "+teamScore.values().toString()+
+                "dateGame=" + dateGame.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")) +
+                ", teams=" + teamScore.keySet()+" "+teamScore.values()+
                 '}';
     }
 
