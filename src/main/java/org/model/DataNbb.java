@@ -8,7 +8,7 @@ public class DataNbb {
 
     public DataNbb() {
         this.teams = new LinkedHashSet<>();
-        this.games = new ArrayList<>();
+        this.games = new LinkedList<>();
     }
 
     public void addTeam(Team team) {
@@ -16,7 +16,7 @@ public class DataNbb {
     }
 
     public void addGame( Game game) {
-        this.games.add(game);
+        this.games.add(0,game);
     }
 
     public Set<Team> getTeams() {
