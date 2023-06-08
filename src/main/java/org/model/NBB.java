@@ -1,10 +1,12 @@
 package org.model;
 
+import org.exception.GameNotFound;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
-import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class NBB {
    private final DataNbb dataChampionship;
@@ -32,8 +34,8 @@ public class NBB {
         String[] month_day = lineEdit[0].split("\\.");
         String [] hour_minute = month_day[2].strip().split(":");
 
-        return LocalDateTime.of(LocalDate.now().getYear(),Integer.valueOf(month_day[1]),
-                Integer.valueOf(month_day[0]),Integer.valueOf(hour_minute[0]),Integer.valueOf(hour_minute[1]));
+        return LocalDateTime.of(LocalDate.now().getYear(),Integer.parseInt(month_day[1]),
+                Integer.parseInt(month_day[0]),Integer.parseInt(hour_minute[0]),Integer.parseInt(hour_minute[1]));
     }
    public void createGame(Game game){
        dataChampionship.addGame(game);
@@ -73,4 +75,27 @@ public class NBB {
         return dataChampionship.getGames();
     }
 
+    public void findGame(List<List<String>> dayFinder) {
+       try{
+           LocalDate dayBefore = LocalDate.of(2023,Integer.parseInt(dayFinder.get(1).get(1))
+                   ,Integer.parseInt(dayFinder.get(1).get(0)));
+           LocalDate dayAfter = LocalDate.of(2023,Integer.valueOf(dayFinder.get(0).get(1))
+                   ,Integer.valueOf(dayFinder.get(0).get(0)));
+
+           List<Game> gamesFound = dataChampionship.gameBetween(dayAfter,dayBefore);
+
+           if(gamesFound.isEmpty()){
+               throw new GameNotFound("No game found between "
+                       +dayAfter.format(DateTimeFormatter.ofPattern("dd/MM/yy"))
+                       +" and "+dayBefore.format(DateTimeFormatter.ofPattern("dd/MM/yy")));
+           }else{
+               System.out.println(gamesFound);
+           }
+
+       }catch (GameNotFound e){
+           e.printStackTrace();
+       }
+
+
+    }
 }
