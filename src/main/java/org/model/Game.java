@@ -17,6 +17,9 @@ public class Game {
     }
     public Game(){}
 
+    public LocalDateTime getDateGame(){
+        return dateGame;
+    }
 
 
     @Override
