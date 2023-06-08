@@ -1,12 +1,15 @@
+import org.application.App;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.model.NBB;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
+import java.io.*;
 
-public class AppTest {
+import static org.junit.Assert.assertEquals;
+
+public class Nbb_test {
+
     private static NBB nbb = new NBB();
 
     @BeforeAll
@@ -24,7 +27,19 @@ public class AppTest {
     }
 
     @Test
-    void notFindGameShouldRaiseGameNotFindException(){
+    void numberOfTeamsInNBBShouldBe17(){
+       assertEquals(17, nbb.teamsInNBB().size());
 
     }
+
+    @Test
+    void numberOfGamesInNBBShouldbe63(){
+        assertEquals(63, nbb.gamesInNBB().size());
+    }
+
+
+
+
+
+
 }
